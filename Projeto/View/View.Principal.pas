@@ -31,7 +31,8 @@ uses
 
 
   Controller.Interfaces, Vcl.StdCtrls, Vcl.Buttons, Data.DB,
-  Datasnap.DBClient, Vcl.DBGrids, Model.Iterator.Interfaces;
+  Datasnap.DBClient, Vcl.DBGrids, Model.Iterator.Interfaces,
+  Proxy.Controller.PermissaoPesquisa;
 
 type
   TStringGridHack = class(TStringGrid)
@@ -60,14 +61,18 @@ type
     BitBtnExportarAlunosXLS: TBitBtn;
     BitBtnExportarAlunosHTML: TBitBtn;
     btnEditar: TButton;
+    chkPermissaoPesquisa: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BitBtnExportarAlunosXLSClick(Sender: TObject);
     procedure BitBtnExportarAlunosHTMLClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
   private
+    FPermissaoPesquisa : iProxyControllerPermissao;
     procedure DefinicaoStringGrid;
     procedure PreencherStringGrid(ALista: iIterator<TPessoa>);
     procedure AdicionarLinhaStringGrid(AObject: TPessoa);
     function RetornaSexo(ASelecao : TSexo): string;
+    procedure ConsultaCliente;
     { Private declarations }
   public
     FControllerPessoa : iControllerCadastro<TPessoa>;
@@ -108,6 +113,11 @@ begin
   finally
     Exportador := nil;
   end;
+end;
+
+procedure TPrincipal.btnPesquisarClick(Sender: TObject);
+begin
+  ConsultaCliente;
 end;
 
 procedure TPrincipal.DefinicaoStringGrid;
@@ -160,6 +170,18 @@ begin
   ClientDataSetClientes.LoadFromFile(CaminhoAplicacao + 'Clientes.xml');
   //FControllerPessoa := TControllerCadastroPessoa.New;
   FControllerPessoa := TControllerCadastro<TPessoa>.New;
+  FPermissaoPesquisa := TProxiControllerPermissaoPesquisa.New;
+
+  ConsultaCliente;
+
+end;
+
+procedure TPrincipal.ConsultaCliente;
+begin
+
+  if not FPermissaoPesquisa.PermitePesquisa(chkPermissaoPesquisa.Checked) then
+   exit;
+
   if Assigned(FControllerPessoa) then
   begin
     FIterator  := FControllerPessoa.Entidade.getLista;
