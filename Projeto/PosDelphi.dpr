@@ -30,7 +30,9 @@ uses
   Controller.Cadastro in 'Controller\Controller.Cadastro.pas',
   Model.Lista.Factory in 'Model\Iterator\Model.Lista.Factory.pas',
   Model.Lista.ObjectList in 'Model\Iterator\Model.Lista.ObjectList.pas',
-  Model.Lista.List in 'Model\Iterator\Model.Lista.List.pas';
+  Model.Lista.List in 'Model\Iterator\Model.Lista.List.pas',
+  Proxy.Controller.PermissaoPesquisa in 'Controller\Proxy\Proxy.Controller.PermissaoPesquisa.pas',
+  Controller.PermissaoPesquisa in 'Controller\Controller.PermissaoPesquisa.pas';
 
 {$R *.res}
 

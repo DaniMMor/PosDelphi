@@ -26,9 +26,6 @@ object Principal: TPrincipal
     FixedRows = 0
     TabOrder = 0
     Visible = False
-    ExplicitLeft = 8
-    ExplicitTop = 344
-    ExplicitWidth = 833
   end
   object DBGridClientes: TDBGrid
     Left = 0
@@ -75,9 +72,6 @@ object Principal: TPrincipal
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 0
-    ExplicitTop = 0
-    ExplicitWidth = 848
     object Label1: TLabel
       Left = 8
       Top = 21
@@ -127,6 +121,17 @@ object Principal: TPrincipal
       Height = 25
       Caption = 'Pesquisar'
       TabOrder = 3
+      OnClick = btnPesquisarClick
+    end
+    object chkPermissaoPesquisa: TCheckBox
+      Left = 526
+      Top = 20
+      Width = 147
+      Height = 17
+      Caption = 'Permite fazer a pesquisa'
+      Checked = True
+      State = cbChecked
+      TabOrder = 4
     end
   end
   object pnAcoes: TPanel
@@ -137,8 +142,6 @@ object Principal: TPrincipal
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitTop = 359
-    ExplicitWidth = 848
     object BitBtnExportarAlunosXLS: TBitBtn
       Left = 77
       Top = 4
@@ -150,7 +153,7 @@ object Principal: TPrincipal
     end
     object BitBtnExportarAlunosHTML: TBitBtn
       Left = 197
-      Top = 3
+      Top = 4
       Width = 120
       Height = 25
       Caption = 'Exportar para HTML'
